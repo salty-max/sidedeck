@@ -1,0 +1,56 @@
+{
+  "name": "@sidedeck/root",
+  "version": "0.1.0",
+  "main": "index.js",
+  "license": "MIT",
+  "author": "salty-max <max@jellycat.fr>",
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "workspaces/*"
+    ],
+    "nohoist": [
+      "workspaces/**/webpack-dev-server",
+      "**/babel-loader",
+      "**/babel-jest"
+    ]
+  },
+  "scripts": {
+    "test": "echo \"todo\"",
+    "build:client": "yarn workspace @sidedeck/client build",
+    "build:api": "yarn workspace @sidedeck/api build",
+    "start:client": "yarn workspace @sidedeck/client start",
+    "start:api": "yarn workspace @sidedeck/api start",
+    "format": "yarn workspaces run format",
+    "lint": "yarn workspaces run lint",
+    "start": "yarn workspaces run start",
+    "build": "yarn workspaces run build",
+    "check-format": "yarn prettier --list-different",
+    "validate": "npm-run-all --parallel check-format lint build",
+    "prepare": "husky install"
+  },
+  "keywords": [
+    "nestjs",
+    "react",
+    "monorepo",
+    "workspaces"
+  ],
+  "devDependencies": {
+    "husky": "^7.0.0",
+    "lint-staged": "^10.5.4",
+    "prettier": "^2.2.1",
+    "npm-run-all": "^4.1.5"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "**/*.+(js|jsx|ts|tsx|json|css)": [
+      "yarn prettier --write",
+      "./node_modules/.bin/eslint — fix",
+      "git add"
+    ]
+  }
+}
