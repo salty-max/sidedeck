@@ -1,19 +1,17 @@
 {
+  "exclude": ["node_modules", "dist", "build"],
+  "files": ["./typings.d.ts"],
   "compilerOptions": {
-    /* Basic Options */
-    "target": "es5",
-    "module": "commonjs",
-    "lib": ["ESNext"],
-
-    /* Strict Type-Checking Options */
-    "strict": true,
-
-    /* Module Resolution Options */
-    "moduleResolution": "node",
+    "noFallthroughCasesInSwitch": true,
+    "jsx": "react",
+    "allowJs": false,
     "esModuleInterop": true,
-
-    /* Advanced Options */
-    "forceConsistentCasingInFileNames": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "baseUrl": "./packages",
+    "paths": {
+      "@sidedeck/client": ["client/src"],
+      "@sidedeck/api": ["api/src"],
+      "@sidedeck/shared": ["shared/src"]
+    }
   }
 }
