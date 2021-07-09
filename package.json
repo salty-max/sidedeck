@@ -21,6 +21,7 @@
     "build:api": "yarn workspace @sidedeck/api build",
     "start:client": "yarn workspace @sidedeck/client start",
     "start:api": "yarn workspace @sidedeck/api start",
+    "start:api:dev": "yarn workspace @sidedeck/api start:dev",
     "format": "yarn workspaces run format",
     "lint": "yarn workspaces run lint",
     "start": "yarn workspaces run start",
@@ -28,7 +29,8 @@
     "check-format": "yarn prettier --list-different",
     "validate": "npm-run-all --parallel check-format lint build",
     "prepare": "husky install",
-    "pre-commit": "lint-staged"
+    "pre-commit": "lint-staged",
+    "clean": "rm -rf node_modules && rm yarn.lock && cd packages/api && rm -rf node_modules && cd ../client && rm -rf node_modules && cd ../.."
   },
   "keywords": [
     "nestjs",

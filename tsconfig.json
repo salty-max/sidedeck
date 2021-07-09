@@ -1,6 +1,5 @@
 {
   "exclude": ["node_modules", "dist", "build"],
-  "files": ["./typings.d.ts"],
   "compilerOptions": {
     "noFallthroughCasesInSwitch": true,
     "jsx": "react",
@@ -13,5 +12,6 @@
       "@sidedeck/api": ["api/src"],
       "@sidedeck/shared": ["shared/src"]
     }
-  }
+  },
+  "include": ["./packages/*/src"]
 }

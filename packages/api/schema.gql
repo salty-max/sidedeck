@@ -1,0 +1,88 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Deck {
+  id: ID!
+  name: String!
+  main: [Card!]!
+  extra: [Card!]!
+  side: [Card!]!
+  owner: User!
+}
+
+type Storage {
+  id: ID!
+  name: String!
+  type: String!
+  owner: User!
+  cards: [Card!]!
+}
+
+type Card {
+  id: ID!
+  name: String!
+  archetype: String!
+  attribute: String
+  desc: String!
+  type: String!
+  race: String!
+  atk: Int
+  def: Int
+  level: Int
+  linkval: Int
+  linkmarkers: [String!]
+  scale: Int
+  image: String!
+  set: String!
+  language: String!
+  storage: Storage!
+  owner: User!
+  deck: Deck
+}
+
+type User {
+  id: ID!
+  name: String!
+  email: String!
+  password: String!
+  cards: [Card!]!
+  decks: [Deck!]!
+  storages: [Storage!]!
+}
+
+type Query {
+  cards: [Card!]!
+  card(input: FindCardInput!): Card!
+  users: [User!]!
+  storages: [Storage!]!
+}
+
+input FindCardInput {
+  id: ID!
+}
+
+type Mutation {
+  createCard(input: CreateCardInput!): Card!
+}
+
+input CreateCardInput {
+  id: ID!
+  name: String!
+  archetype: String!
+  attribute: String
+  desc: String!
+  type: String!
+  race: String!
+  atk: Int
+  def: Int
+  level: Int
+  linkval: Int
+  linkmarkers: [String!]
+  scale: Int
+  image: String!
+  set: String!
+  language: String!
+  storage: Int!
+  owner: Int!
+}
