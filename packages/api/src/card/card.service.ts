@@ -1,40 +1,38 @@
 import { Injectable } from '@nestjs/common';
-import { Card, CreateCardInput } from './card.schema';
+import { Card, CardDocument, CreateCardInput } from './card.schema';
 import cards from '../data/cards.js';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
 
 @Injectable()
 export class CardService {
   cards: Partial<Card>[];
 
-  constructor() {
+  constructor(@InjectModel(Card.name) private cardModel: Model<CardDocument>) {
     this.cards = cards;
   }
 
   async findMany() {
-    return this.cards;
+    return this.cardModel.find().lean();
   }
 
   async findById(id) {
-    const res = this.cards.filter((card) => card.id === id);
-    if (!res.length) return null;
-
-    return res[0];
+    return this.cardModel.findById(id).lean();
   }
 
   async findByOwnerId(ownerId) {
-    return this.cards.filter((card) => card.owner === ownerId);
+    return this.cardModel.find({ owner: ownerId });
   }
 
   async findByStorageId(storageId) {
-    return this.cards.filter((card) => card.storage === storageId);
+    return this.cardModel.find({ storage: storageId });
   }
 
   async findByDeckId(deckId) {
-    return this.cards.filter((card) => card.deck === deckId);
+    return this.cardModel.find({ deck: deckId });
   }
 
   async createCard(card: CreateCardInput) {
-    this.cards = [card, ...this.cards];
-    return card;
+    return this.cardModel.create(card);
   }
 }

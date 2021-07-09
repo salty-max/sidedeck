@@ -2,6 +2,16 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type User {
+  _id: ID!
+  name: String!
+  email: String!
+  password: String!
+  cards: [Card!]!
+  decks: [Deck!]!
+  storages: [Storage!]!
+}
+
 type Deck {
   id: ID!
   name: String!
@@ -11,16 +21,9 @@ type Deck {
   owner: User!
 }
 
-type Storage {
-  id: ID!
-  name: String!
-  type: String!
-  owner: User!
-  cards: [Card!]!
-}
-
 type Card {
-  id: ID!
+  _id: ID!
+  card_id: Int!
   name: String!
   archetype: String!
   attribute: String
@@ -30,8 +33,8 @@ type Card {
   atk: Int
   def: Int
   level: Int
-  linkval: Int
-  linkmarkers: [String!]
+  link_val: Int
+  link_markers: [String!]
   scale: Int
   image: String!
   set: String!
@@ -41,14 +44,12 @@ type Card {
   deck: Deck
 }
 
-type User {
-  id: ID!
+type Storage {
+  _id: ID!
   name: String!
-  email: String!
-  password: String!
-  cards: [Card!]!
-  decks: [Deck!]!
-  storages: [Storage!]!
+  type: String!
+  owner: User!
+  cards: [Card!]
 }
 
 type Query {
@@ -64,10 +65,12 @@ input FindCardInput {
 
 type Mutation {
   createCard(input: CreateCardInput!): Card!
+  createUser(input: CreateUserInput!): User!
+  createStorage(input: CreateStorageInput!): Storage!
 }
 
 input CreateCardInput {
-  id: ID!
+  card_id: Float!
   name: String!
   archetype: String!
   attribute: String
@@ -77,12 +80,24 @@ input CreateCardInput {
   atk: Int
   def: Int
   level: Int
-  linkval: Int
-  linkmarkers: [String!]
+  link_val: Int
+  link_markers: [String!]
   scale: Int
   image: String!
   set: String!
   language: String!
-  storage: Int!
-  owner: Int!
+  storage: String!
+  owner: String!
+}
+
+input CreateUserInput {
+  name: String!
+  email: String!
+  password: String!
+}
+
+input CreateStorageInput {
+  name: String!
+  type: String!
+  owner: String!
 }

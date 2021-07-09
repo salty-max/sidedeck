@@ -5,7 +5,7 @@ import { User } from 'src/user/user.schema';
 @ObjectType()
 export class Deck {
   @Field(() => ID)
-  id: number;
+  id: string;
 
   @Field()
   name: string;
@@ -26,7 +26,7 @@ export class Deck {
 @InputType()
 export class CreateDeckInput {
   @Field(() => ID)
-  id: number;
+  id: string;
 
   @Field()
   name: string;
@@ -47,5 +47,5 @@ export class CreateDeckInput {
 @InputType()
 export class FindDeckInput {
   @Field(() => ID)
-  id: number;
+  id: string;
 }

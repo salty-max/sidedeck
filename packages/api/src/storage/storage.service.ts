@@ -1,26 +1,27 @@
 import { Injectable } from '@nestjs/common';
-import storages from 'src/data/storages';
-import { Storage } from './storage.schema';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { CreateStorageInput, Storage, StorageDocument } from './storage.schema';
 
 @Injectable()
 export class StorageService {
-  storages: Storage[];
-
-  constructor() {
-    this.storages = storages;
-  }
+  constructor(
+    @InjectModel(Storage.name) private storageModel: Model<StorageDocument>,
+  ) {}
 
   async findMany() {
-    return this.storages;
+    return this.storageModel.find().lean();
   }
 
   async findById(id) {
-    const res = this.storages.filter((st) => st.id === id);
-
-    return res.length ? res[0] : null;
+    return this.storageModel.findById(id);
   }
 
   async findByOwnerId(ownerId) {
-    return this.storages.filter((storage) => storage.owner === ownerId);
+    return this.storageModel.find({ owner: ownerId });
+  }
+
+  async createStorage(storage: CreateStorageInput) {
+    return this.storageModel.create(storage);
   }
 }

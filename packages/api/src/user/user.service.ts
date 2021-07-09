@@ -1,14 +1,21 @@
 import { Injectable } from '@nestjs/common';
-import users from '../data/users.js';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { CreateUserInput, User, UserDocument } from './user.schema.js';
 
 @Injectable()
 export class UserService {
+  constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
+
   async findMany() {
-    return users;
+    return this.userModel.find().lean();
   }
 
   async findById(id) {
-    const res = users.filter((user) => user.id === id);
-    return res.length ? res[0] : null;
+    return this.userModel.findById(id);
+  }
+
+  async createUser(user: CreateUserInput) {
+    return this.userModel.create(user);
   }
 }

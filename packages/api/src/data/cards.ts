@@ -91,8 +91,8 @@ const cards: any = [
     race: 'Plant',
     attribute: 'EARTH',
     archetype: 'Traptrix',
-    linkval: 2,
-    linkmarkers: ['Bottom', 'Right'],
+    link_val: 2,
+    link_markers: ['Bottom', 'Right'],
     card_sets: [
       {
         set_name: 'Lightning Overdrive',
@@ -399,8 +399,8 @@ const cards: any = [
     race: 'Plant',
     attribute: 'EARTH',
     archetype: 'Traptrix',
-    linkval: 1,
-    linkmarkers: ['Bottom'],
+    link_val: 1,
+    link_markers: ['Bottom'],
     card_sets: [
       {
         set_name: "Battles of Legend: Hero's Revenge",
