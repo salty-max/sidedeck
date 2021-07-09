@@ -57,9 +57,14 @@ type Query {
   card(input: FindCardInput!): Card!
   users: [User!]!
   storages: [Storage!]!
+  storage(input: FindStorageInput!): Storage!
 }
 
 input FindCardInput {
+  id: ID!
+}
+
+input FindStorageInput {
   id: ID!
 }
 

@@ -45,3 +45,9 @@ export class CreateStorageInput {
   @Field(() => String)
   owner: string;
 }
+
+@InputType()
+export class FindStorageInput {
+  @Field(() => ID)
+  id: string;
+}

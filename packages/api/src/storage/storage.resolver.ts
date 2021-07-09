@@ -10,7 +10,11 @@ import { Card } from 'src/card/card.schema';
 import { CardService } from 'src/card/card.service';
 import { User } from 'src/user/user.schema';
 import { UserService } from 'src/user/user.service';
-import { CreateStorageInput, Storage } from './storage.schema';
+import {
+  CreateStorageInput,
+  FindStorageInput,
+  Storage,
+} from './storage.schema';
 import { StorageService } from './storage.service';
 
 @Resolver(() => Storage)
@@ -24,6 +28,11 @@ export class StorageResolver {
   @Query(() => [Storage])
   async storages() {
     return this.storageService.findMany();
+  }
+
+  @Query(() => Storage)
+  async storage(@Args('input') { id }: FindStorageInput) {
+    return this.storageService.findById(id);
   }
 
   @Mutation(() => Storage)
