@@ -111,6 +111,14 @@ export class Card {
   @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Deck' })
   @Field(() => Deck, { nullable: true })
   deck: Deck | string;
+
+  @Prop()
+  @Field(() => Int, { nullable: true })
+  quantity_in_deck: number;
+
+  @Prop({ required: true })
+  @Field(() => Int)
+  quantity: number;
 }
 
 export const CardSchema = SchemaFactory.createForClass(Card);
@@ -172,6 +180,9 @@ export class CreateCardInput {
 
   @Field(() => String)
   owner: string;
+
+  @Field(() => Int)
+  quantity: number;
 }
 
 @InputType()

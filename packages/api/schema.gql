@@ -42,6 +42,8 @@ type Card {
   storage: Storage!
   owner: User!
   deck: Deck
+  quantity_in_deck: Int
+  quantity: Int!
 }
 
 type Storage {
@@ -93,6 +95,7 @@ input CreateCardInput {
   language: String!
   storage: String!
   owner: String!
+  quantity: Int!
 }
 
 input CreateUserInput {
