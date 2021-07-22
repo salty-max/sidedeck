@@ -6,7 +6,6 @@ type User {
   _id: ID!
   name: String!
   email: String!
-  password: String!
   cards: [Card!]!
   decks: [Deck!]!
   storages: [Storage!]!
@@ -58,6 +57,9 @@ type Query {
   cards: [Card!]!
   card(input: FindCardInput!): Card!
   users: [User!]!
+  login(input: LoginInput!): User
+  logout: User
+  me: User
   storages: [Storage!]!
   storage(input: FindStorageInput!): Storage!
 }
@@ -66,13 +68,19 @@ input FindCardInput {
   id: ID!
 }
 
+input LoginInput {
+  email: String!
+  password: String!
+}
+
 input FindStorageInput {
   id: ID!
 }
 
 type Mutation {
   createCard(input: CreateCardInput!): Card!
-  createUser(input: CreateUserInput!): User!
+  registerUser(input: CreateUserInput!): User!
+  confirmUser(input: ConfirmUserInput!): User!
   createStorage(input: CreateStorageInput!): Storage!
 }
 
@@ -102,6 +110,11 @@ input CreateUserInput {
   name: String!
   email: String!
   password: String!
+}
+
+input ConfirmUserInput {
+  email: String!
+  confirmToken: String!
 }
 
 input CreateStorageInput {
